@@ -1,20 +1,31 @@
 import { CustomCard1 } from "@/src/components/cards";
-import { useMobile } from "@/src/hooks";
+import { useDialogs, useMobile } from "@/src/hooks";
 import { IProductItem } from "@/src/services/products/types";
+import { useEndProduct } from "@/src/services/products/useProducts";
 import { Button, Stack } from "@mui/material";
 import { useParams, useRouter } from "next/navigation";
 import { ReactNode } from "react";
+import ProductEndDialog from "../dialogs/ProductEndDialog";
 
 const Descriptions = ({
   data,
   isLoading,
+  isOwn,
 }: {
   data: IProductItem | undefined;
   isLoading: boolean;
+  isOwn: boolean;
 }) => {
   const { isMobile } = useMobile();
   const router = useRouter();
   const { productId } = useParams();
+
+  const [dialogs, handleOpenDialog, handleCloseDialog] = useDialogs({
+    end: false,
+  });
+
+  const { mutate: handleEndProduct } = useEndProduct({});
+
   if (isLoading) return <>loading</>;
   if (!data) return <>데이터 없음</>;
 
@@ -29,7 +40,7 @@ const Descriptions = ({
           <DescForms label="추가 설명">{data.contents}</DescForms>
           <DescForms label="TC 작성자">{data.email}</DescForms>
         </Stack>
-        <Stack>
+        <Stack direction={"row"} spacing={1} alignItems="start">
           {data.status === "start" && (
             <Button
               variant="contained"
@@ -40,12 +51,36 @@ const Descriptions = ({
             </Button>
           )}
           {data.status === "end" && (
-            <Button variant="contained" sx={{ color: "green" }}>
+            <Button
+              variant="contained"
+              sx={{ color: "green" }}
+              onClick={() => router.push(`/complete/${productId}`)}
+            >
               qa 결과 상세보기
+            </Button>
+          )}
+          {data.status === "start" && isOwn && (
+            <Button
+              variant="contained"
+              sx={{ color: "green" }}
+              onClick={() => {
+                handleOpenDialog("end")();
+              }}
+            >
+              프로젝트 qa 종료
             </Button>
           )}
         </Stack>
       </Stack>
+      <ProductEndDialog
+        open={!!dialogs?.end}
+        onCancel={() => handleCloseDialog("end")()}
+        onSubmit={() => {
+          handleEndProduct({ id: Number(productId) });
+          handleCloseDialog("end")();
+          router.push(`/products`);
+        }}
+      />
     </CustomCard1>
   );
 };

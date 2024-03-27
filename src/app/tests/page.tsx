@@ -1,4 +1,4 @@
-import Tests from "@/src/sections/tests/\bTests";
+import { Tests } from "@/src/sections";
 
 export default async function Home() {
   return <Tests />;

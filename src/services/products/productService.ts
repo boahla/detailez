@@ -1,6 +1,8 @@
 import { productStatus } from "@/src/datas";
 import axios from "@/src/utils/axios";
 import {
+  IAnswerTCItem,
+  IAnswerTCItemProps,
   IProductItem,
   IQAListItem,
   IQATargetItem,
@@ -116,6 +118,37 @@ class ProductService {
     }
     return undefined;
   }
+
+  // update qa product
+  async SaveProduct({
+    id,
+    status,
+  }: {
+    id: number | undefined;
+    status: string;
+  }): Promise<ISaveProductResult | undefined> {
+    try {
+      const res = await axios.patch(`/product/${id}/start`, {
+        status,
+      });
+      return res.data;
+    } catch (err) {
+      console.log("error", { err });
+    }
+    return undefined;
+  }
+  // end product
+  async EndProduct({ id }: { id: number | undefined }): Promise<undefined> {
+    try {
+      await axios.patch(`product/${id}/end`, {
+        status: "end",
+      });
+    } catch (err) {
+      console.log("error", { err });
+    }
+    return undefined;
+  }
+
   // update test case
   async updateTCItem({
     id,
@@ -174,19 +207,13 @@ class ProductService {
     return undefined;
   }
 
-  // update qa product
-  async SaveProduct({
+  async AnswerTCItem({
     id,
-    status,
-  }: {
-    id: number | undefined;
-    status: string;
-  }): Promise<ISaveProductResult | undefined> {
+    contents,
+  }: IAnswerTCItemProps): Promise<IAnswerTCItem | undefined> {
     try {
-      const res = await axios.patch(`/product/${id}/start`, {
-        status,
-      });
-      return res.data;
+      const res = await axios.post(`/answer/${id}`, contents);
+      return res.data.data;
     } catch (err) {
       console.log("error", { err });
     }

@@ -20,7 +20,7 @@ const Summary = () => {
 
   return (
     <Stack direction="column" spacing={3}>
-      <Descriptions {...description} />
+      <Descriptions {...description} isOwn={!!reports?.product_owner} />
       {reports?.product_owner && <Results {...report} />}
 
       <Stack direction={isMobile ? "column" : "row"} spacing={3}>

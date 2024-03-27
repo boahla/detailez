@@ -1,5 +1,5 @@
-import Product from "@/src/sections/product/Product";
+import { Testcase } from "@/src/sections";
 
 export default async function Home() {
-  return <Product />;
+  return <Testcase />;
 }

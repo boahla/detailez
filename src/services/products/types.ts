@@ -32,7 +32,7 @@ export interface IQATargetItem {
   updated_at: string;
   image_size_bk: string;
   user_id: string;
-  status: string;
+  status: "pass" | "cancel" | "hold" | "error" | null;
   tc: string;
   answer_id: string;
   board: any[];
@@ -57,4 +57,17 @@ export type ISaveProductResult = {
         updated_at: string;
         is_deleted: boolean;
       };
+};
+
+export type IAnswerTCItemProps = {
+  id: number | undefined;
+  contents: {
+    status: "pass" | "cancel" | "hold" | "error";
+    tc: number;
+  };
+};
+
+export type IAnswerTCItem = {
+  answer_count: number;
+  tc_count: number;
 };

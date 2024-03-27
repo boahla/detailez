@@ -1,5 +1,6 @@
 import { productStatus } from "@/src/datas";
 import productService from "./productService";
+import { IAnswerTCItemProps } from "./types";
 
 const queryKeys = {
   all: ["products"] as const,
@@ -74,6 +75,15 @@ const queryOptions = {
     queryFn: () => productService.getProductQAItem({ id }),
     enabled: !!id,
   }),
+  saveProduct: ({ onSuccess }: { onSuccess?: any }) => ({
+    mutationFn: ({ id, status }: { id: number; status: string }) =>
+      productService.SaveProduct({ id, status }),
+    onSuccess: onSuccess,
+  }),
+  endProduct: ({ onSuccess }: { onSuccess?: any }) => ({
+    mutationFn: ({ id }: { id: number }) => productService.EndProduct({ id }),
+    onSuccess: onSuccess,
+  }),
   updatetcItem: ({
     id,
     contents,
@@ -99,8 +109,9 @@ const queryOptions = {
     mutationFn: ({ id }: { id: number }) => productService.DeleteTC({ id }),
     onSuccess: onSuccess,
   }),
-  saveProduct: ({ onSuccess }: { onSuccess?: any }) => ({
-    mutationFn: ({ id , status}: { id: number , status: string}) => productService.SaveProduct({ id, status }),
+  answertcItem: ({ onSuccess }: { onSuccess?: any }) => ({
+    mutationFn: ({ id, contents }: IAnswerTCItemProps) =>
+      productService.AnswerTCItem({ id, contents }),
     onSuccess: onSuccess,
   }),
 };

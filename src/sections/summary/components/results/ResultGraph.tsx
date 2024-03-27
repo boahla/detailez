@@ -1,30 +1,27 @@
 import { CustomCard1 } from "@/src/components/cards";
-import {
-  Card,
-  CircularProgress,
-  Grid,
-  Stack,
-  circularProgressClasses,
-} from "@mui/material";
+import { Grid, Stack } from "@mui/material";
+
+const types = {
+  success: "성공",
+  error: "오류",
+  hold: "보류",
+  cancel: "취소",
+};
 
 const ResultGraph = ({
   count,
   type,
 }: {
-  count: number;
+  count: number | string;
   type: "success" | "error" | "hold" | "cancel";
 }) => {
   return (
-    <Grid item xs={12} md={4} lg={3}>
+    <Grid item xs={12} md={2.4}>
       <CustomCard1 sx={{ bgcolor: "#46c18e" }}>
         <Stack direction="row" justifyContent="space-between">
-          <Stack>
-            {type === "success" && "성공"}
-            {type === "error" && "오류"}
-            {type === "hold" && "보류"}
-            {type === "cancel" && "취소"}
-          </Stack>
-          <Stack>
+          <Stack>{types[type]}</Stack>
+          <Stack>{count}%</Stack>
+          {/* <Stack>
             <CircularProgress
               sx={{
                 [`& .${circularProgressClasses.circle}`]: {
@@ -39,7 +36,7 @@ const ResultGraph = ({
               variant="determinate"
               value={count}
             />
-          </Stack>
+          </Stack> */}
         </Stack>
       </CustomCard1>
     </Grid>

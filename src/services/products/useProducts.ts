@@ -1,4 +1,8 @@
-import { useMutation, useQuery } from "@tanstack/react-query";
+import {
+  UseMutationOptions,
+  useMutation,
+  useQuery,
+} from "@tanstack/react-query";
 import { queryOptions } from "./quries";
 import { productStatus } from "@/src/datas";
 
@@ -61,6 +65,14 @@ export function useGetProductQATarget({ id }: { id: number | undefined }) {
   return useQuery(queryOptions.productQATarget({ id }));
 }
 
+export function useSaveProduct({ onSuccess }: { onSuccess?: any }) {
+  return useMutation(queryOptions.saveProduct({ onSuccess }));
+}
+
+export function useEndProduct({ onSuccess }: { onSuccess?: any }) {
+  return useMutation(queryOptions.endProduct({ onSuccess }));
+}
+
 export function useUpdateTCItem({
   id,
   contents,
@@ -73,8 +85,8 @@ export function useUpdateTCItem({
   return useMutation(queryOptions.updatetcItem({ id, contents, onSuccess }));
 }
 
-export function useAddTCItem({ onSuccess }: { onSuccess?: any }) {
-  return useMutation(queryOptions.addtcItem({ onSuccess }));
+export function useAddTCItem(props: UseMutationOptions) {
+  return useMutation(queryOptions.addtcItem(props));
 }
 
 export function useDeleteTCItem({ onSuccess }: { onSuccess?: any }) {
@@ -85,6 +97,6 @@ export function useDeleteTC({ onSuccess }: { onSuccess?: any }) {
   return useMutation(queryOptions.deletetc({ onSuccess }));
 }
 
-export function useSaveProduct({ onSuccess }: { onSuccess?: any }) {
-  return useMutation(queryOptions.saveProduct({ onSuccess }));
+export function useAnswerTC({ onSuccess }: { onSuccess?: any }) {
+  return useMutation(queryOptions.answertcItem({ onSuccess }));
 }
