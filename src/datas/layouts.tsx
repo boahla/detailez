@@ -4,7 +4,7 @@ import {
 } from "@mui/icons-material";
 
 const LAYOUTS_NUMBERS = {
-  drawerWidth: 260,
+  drawerWidth: 260 - 24,
   headerHeight: 80,
 };
 

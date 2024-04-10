@@ -31,7 +31,7 @@ export default function CommonLayout({
         <Sidebar open={open}>{sidebar}</Sidebar>
         <Main open={open}>
           <DrawerHeader />
-          {children}
+          <CardMain>{children}</CardMain>
         </Main>
       </Box>
     </LayoutContext.Provider>
@@ -42,9 +42,10 @@ const Main = styled("main", { shouldForwardProp: (prop) => prop !== "open" })<{
   open?: boolean;
 }>(({ theme, open }) => ({
   flexGrow: 1,
-  padding: theme.spacing(3),
-  backgroundColor: "#eceff1",
+  backgroundColor: "white",
   minHeight: "100vh",
+  paddingLeft: theme.spacing(3),
+  paddingRight: theme.spacing(3),
   transition: theme.transitions.create("margin", {
     easing: theme.transitions.easing.sharp,
     duration: theme.transitions.duration.leavingScreen,
@@ -57,4 +58,12 @@ const Main = styled("main", { shouldForwardProp: (prop) => prop !== "open" })<{
     }),
     marginLeft: 0,
   }),
+}));
+
+const CardMain = styled(Box)<{}>(({ theme }) => ({
+  backgroundColor: theme.palette.deGray4,
+  padding: theme.spacing(3),
+  borderTopRightRadius: "10px",
+  borderTopLeftRadius: "10px",
+  minHeight: "100vh",
 }));

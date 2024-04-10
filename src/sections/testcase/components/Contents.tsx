@@ -3,7 +3,7 @@ import { CustomToggleButton1 } from "@/src/components/toggleButton";
 import { useMobile } from "@/src/hooks";
 import { IQATargetItem } from "@/src/services/products/types";
 import { useAnswerTC } from "@/src/services/products/useProducts";
-import { Box, Stack } from "@mui/material";
+import { Stack } from "@mui/material";
 import Image from "next/image";
 import { useParams } from "next/navigation";
 

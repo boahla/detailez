@@ -12,7 +12,7 @@ const Tests = ({}) => {
 
   return (
     <Card elevation={0} sx={{ bgcolor: "transparent" }}>
-      <Stack direction="column" spacing={3} p={3}>
+      <Stack direction="column" spacing={3}>
         <TypeButtons value={status} setValue={setStatus} />
         <ProductLists data={data} isLoading={isLoading} />
       </Stack>

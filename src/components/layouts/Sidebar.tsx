@@ -12,7 +12,6 @@ const Sidebar = ({ open, children }: SidebarProps) => {
   return (
     <CustomDrawer variant="persistent" anchor="left" open={open}>
       <DrawerHeader />
-
       {children}
     </CustomDrawer>
   );

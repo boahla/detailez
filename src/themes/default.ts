@@ -6,18 +6,32 @@ declare module "@mui/material/styles" {
   interface PaletteOptions {
     black: string;
     deBlack: string;
-    deGray: object;
-    deGreen: object;
-    dePurple: object;
+    deGray1: string;
+    deGray2: string;
+    deGray3: string;
+    deGray4: string;
+    deGreen1: string;
+    deGreen2: string;
+    deGreen3: string;
+    deGreen4: string;
+    dePurple1: string;
+    dePurple2: string;
     deError: string;
     dePrimary: string;
   }
   interface Palette {
     black: string;
     deBlack: string;
-    deGray: object;
-    deGreen: object;
-    dePurple: object;
+    deGray1: string;
+    deGray2: string;
+    deGray3: string;
+    deGray4: string;
+    deGreen1: string;
+    deGreen2: string;
+    deGreen3: string;
+    deGreen4: string;
+    dePurple1: string;
+    dePurple2: string;
     deError: string;
     dePrimary: string;
   }

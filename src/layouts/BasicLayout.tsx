@@ -9,10 +9,11 @@ import {
   ListItemIcon,
   ListItemText,
 } from "@mui/material";
-import { useRouter } from "next/navigation";
+import { usePathname, useRouter } from "next/navigation";
 
 export default function BasicLayout({ children }: { children: ReactNode }) {
   const router = useRouter();
+  const path = usePathname();
 
   const handleRouteSidebar = (item: any) => {
     router.push(item.route);
@@ -21,15 +22,31 @@ export default function BasicLayout({ children }: { children: ReactNode }) {
   return (
     <CommonLayout
       sidebar={
-        <List>
+        <List sx={{ pl: 2, pt: 4 }}>
           {LAYOUT_SIDEBAR_MENUS.map((item, idx) => (
             <ListItem
               key={idx}
               disablePadding
               onClick={() => handleRouteSidebar(item)}
+              sx={{
+                borderRadius: "10px",
+                color: "dePurple1",
+                mb: 1,
+                "& svg": {
+                  color: "dePurple1",
+                },
+                "& .MuiButtonBase-root:hover": {
+                  borderRadius: "10px",
+                },
+                ...(item.route === path && {
+                  bgcolor: "deGray4",
+                }),
+              }}
             >
               <ListItemButton>
-                <ListItemIcon>{item.icon}</ListItemIcon>
+                <ListItemIcon sx={{ minWidth: "24px !important", mr: 1 }}>
+                  {item.icon}
+                </ListItemIcon>
                 <ListItemText primary={item.label} />
               </ListItemButton>
             </ListItem>

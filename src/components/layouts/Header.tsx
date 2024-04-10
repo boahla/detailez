@@ -1,10 +1,20 @@
 import { LAYOUTS_NUMBERS } from "@/src/datas";
-import { Button, IconButton, Toolbar, Typography, styled } from "@mui/material";
+import {
+  Button,
+  IconButton,
+  Stack,
+  Toolbar,
+  Typography,
+  styled,
+  useTheme,
+} from "@mui/material";
 import MuiAppBar, { AppBarProps as MuiAppBarProps } from "@mui/material/AppBar";
 import MenuIcon from "@mui/icons-material/Menu";
-import { signOut } from "next-auth/react";
+// import { signOut } from "next-auth/react";
 import SignInButton from "@/src/components/layouts/components/SignInButton";
 import { useRouter } from "next/navigation";
+import Logo from "@/public/logo/detailezLogo.png";
+import Image from "next/image";
 
 interface HeaderProps {
   open: boolean;
@@ -13,27 +23,48 @@ interface HeaderProps {
 
 const Header = ({ open, onClick }: HeaderProps) => {
   const router = useRouter();
+  const theme = useTheme();
   return (
     <AppBar position="fixed" open={open}>
-      <Toolbar>
-        <Typography
-          variant="h6"
-          noWrap
-          component="div"
-          onClick={() => router.push(`/products`)}
-          color="GrayText"
+      <Toolbar
+        sx={{
+          minHeight: "80px !important",
+          display: "flex",
+          alignItems: "center",
+          justifyContent: "space-between",
+        }}
+      >
+        <Stack
+          direction="row"
+          alignItems="center"
+          justifyContent="space-between"
+          sx={{
+            width: LAYOUTS_NUMBERS.drawerWidth,
+          }}
         >
-          ㄷㅣ떼일 d이지
-        </Typography>
-        <IconButton
-          color="info"
-          aria-label="open drawer"
-          onClick={onClick}
-          edge="start"
-          sx={{ mx: 2 }}
-        >
-          <MenuIcon />
-        </IconButton>
+          <Image
+            src={Logo}
+            alt="img"
+            width="124"
+            height="26"
+            onClick={() => router.push(`/products`)}
+            style={{ cursor: "pointer" }}
+          />
+          <IconButton
+            color="info"
+            aria-label="open drawer"
+            onClick={onClick}
+            edge="start"
+            sx={{
+              bgcolor: `${theme.palette.deGreen3} !important`,
+              color: "dePurple1",
+              borderRadius: "10px",
+            }}
+          >
+            <MenuIcon />
+          </IconButton>
+        </Stack>
+
         <SignInButton />
       </Toolbar>
     </AppBar>
