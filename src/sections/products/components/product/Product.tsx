@@ -1,6 +1,6 @@
 import { IProductItem } from "@/src/services/products/types";
 import { formatDate } from "@/src/utils/format";
-import { Stack, Typography } from "@mui/material";
+import { Stack, Typography, useTheme } from "@mui/material";
 import { useRouter } from "next/navigation";
 import ProductHeader from "./ProductHeader";
 import { CustomCard1 } from "@/src/components/cards";
@@ -20,6 +20,7 @@ interface IProduct {
 
 const Product = ({ item, load }: IProduct) => {
   const router = useRouter();
+  const theme = useTheme();
 
   const onMoveProducts = () => {
     if (item.status === "start" || item.status === "end") {
@@ -76,8 +77,8 @@ const Product = ({ item, load }: IProduct) => {
   };
 
   return (
-    <CustomCard1>
-      <Stack direction="column" spacing={3}>
+    <CustomCard1 sx={{ height: theme.typography.pxToRem(218) }}>
+      <Stack direction="column" spacing={2}>
         <ProductHeader
           item={item}
           onCancel={onCancel}
@@ -88,12 +89,29 @@ const Product = ({ item, load }: IProduct) => {
           direction="column"
           onClick={onMoveProducts}
           sx={{ cursor: "pointer" }}
+          spacing={1.5}
         >
-          <Typography>{item.name}</Typography>
-          <Typography>
+          <Stack
+            sx={{
+              textOverflow: "ellipsis",
+              overflow: "hidden",
+              wordBreak: "break-word",
+
+              display: " -webkit-box",
+              "-webkit-line-clamp": "2", // 원하는 라인수
+              "-webkit-box-orient": "vertical",
+              color: "deGray1",
+            }}
+          >
+            {item.name}
+          </Stack>
+
+          <Typography color="deGray1">
             {!!item.contents ? item.contents : "추가 설명 없음"}
           </Typography>
-          <Typography>{formatDate({ date: item.created_at })}</Typography>
+          <Typography color="deGray2">
+            {formatDate({ date: item.created_at })}
+          </Typography>
         </Stack>
       </Stack>
     </CustomCard1>

@@ -39,6 +39,7 @@ declare module "@mui/material/styles" {
 
 const defaultTheme = extendTheme({
   colorSchemes: palettes,
+  // components:
 });
 
 export default defaultTheme;

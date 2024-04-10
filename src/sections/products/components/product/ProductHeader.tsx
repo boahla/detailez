@@ -1,16 +1,16 @@
 import { IProductItem } from "@/src/services/products/types";
 import { MoreHoriz } from "@mui/icons-material";
-import { Chip, IconButton, Menu, MenuItem, Stack } from "@mui/material";
+import { Chip, IconButton, Menu, MenuItem, Stack, styled } from "@mui/material";
 import { MouseEvent, useState } from "react";
 
 const testStatus = (status: string) =>
   status === "start"
-    ? "테스트 중"
+    ? { label: "테스트 중", type: "2" }
     : status === "end"
-    ? "프로젝트 완료"
+    ? { label: "프로젝트 완료", type: "disabled" }
     : status === "ing"
-    ? "QA 생성중"
-    : undefined;
+    ? { label: "QA 생성중", type: "1" }
+    : { label: "-", type: "disabled" };
 
 interface IProductHeader {
   item: IProductItem;
@@ -47,7 +47,12 @@ const ProductHeader = ({
 
   return (
     <Stack direction="row" justifyContent="space-between" alignItems="center">
-      {!!testStatus && <Chip label={testStatus(item.status)} />}
+      {!!testStatus && (
+        <StyledChip
+          type={testStatus(item.status).type}
+          label={testStatus(item.status).label}
+        />
+      )}
 
       <IconButton
         id="basic-button"
@@ -68,6 +73,7 @@ const ProductHeader = ({
         MenuListProps={{
           "aria-labelledby": "basic-button",
         }}
+        sx={{}}
       >
         {(item.status === "start" || item.status === "end") && (
           <MenuItem onClick={handleCopy}>전체 복사</MenuItem>
@@ -90,3 +96,23 @@ const ProductHeader = ({
   );
 };
 export default ProductHeader;
+
+const StyledChip = styled(Chip, {
+  shouldForwardProp: (prop) => prop !== "type",
+})<{
+  type?: string | undefined;
+  // "disabled" | "1" | "2";
+}>(({ theme, type }) => ({
+  ...(type === "disabled" && {
+    backgroundColor: theme.palette.deGray3,
+    color: theme.palette.dePurple2,
+  }),
+  ...(type === "1" && {
+    backgroundColor: theme.palette.deGreen1,
+    color: "white",
+  }),
+  ...(type === "2" && {
+    backgroundColor: theme.palette.deGreen4,
+    color: theme.palette.deGreen1,
+  }),
+}));
