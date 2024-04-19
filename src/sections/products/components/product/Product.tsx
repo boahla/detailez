@@ -96,20 +96,19 @@ const Product = ({ item, load }: IProduct) => {
               textOverflow: "ellipsis",
               overflow: "hidden",
               wordBreak: "break-word",
-
               display: " -webkit-box",
-              "-webkit-line-clamp": "2", // 원하는 라인수
-              "-webkit-box-orient": "vertical",
-              color: "deGray1",
+              WebkitLineClamp: "2", // 원하는 라인수
+              WebkitBoxOrient: "vertical",
+              color: "deGray.1",
             }}
           >
             {item.name}
           </Stack>
 
-          <Typography color="deGray1">
+          <Typography color="deGray.1">
             {!!item.contents ? item.contents : "추가 설명 없음"}
           </Typography>
-          <Typography color="deGray2">
+          <Typography color="deGray.2">
             {formatDate({ date: item.created_at })}
           </Typography>
         </Stack>

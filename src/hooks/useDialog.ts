@@ -4,24 +4,18 @@ const useDialogs = ({
   initialValues,
 }: any): [
   dialogs: any,
-  handleOpenDialog: (type: string) => (payload?: any) => void,
-  handleCloseDialog: (type: string) => (payload?: any) => void
+  handleOpenDialog: (type: string) => void,
+  handleCloseDialog: (type: string) => void
 ] => {
   const [dialogs, setDialogs] = useState(initialValues);
 
-  const handleOpenDialog = useCallback(
-    (type: string) => (payload?: any) => {
-      setDialogs((prev: any) => ({ ...prev, [type]: payload || true }));
-    },
-    []
-  );
+  const handleOpenDialog = useCallback((type: string) => {
+    setDialogs((prev: any) => ({ ...prev, [type]: true }));
+  }, []);
 
-  const handleCloseDialog = useCallback(
-    (type: string) => (payload?: any) => {
-      setDialogs((prev: any) => ({ ...prev, [type]: null }));
-    },
-    []
-  );
+  const handleCloseDialog = useCallback((type: string) => {
+    setDialogs((prev: any) => ({ ...prev, [type]: false }));
+  }, []);
 
   return [dialogs, handleOpenDialog, handleCloseDialog];
 };

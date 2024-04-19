@@ -120,7 +120,7 @@ class ProductService {
   }
 
   // update qa product
-  async SaveProduct({
+  async saveProduct({
     id,
     status,
   }: {
@@ -138,7 +138,7 @@ class ProductService {
     return undefined;
   }
   // end product
-  async EndProduct({ id }: { id: number | undefined }): Promise<undefined> {
+  async endProduct({ id }: { id: number | undefined }): Promise<undefined> {
     try {
       await axios.patch(`product/${id}/end`, {
         status: "end",
@@ -168,7 +168,7 @@ class ProductService {
     return undefined;
   }
   // add test case
-  async AddTCItem({
+  async addTCItem({
     id,
   }: {
     id: number | undefined;
@@ -182,7 +182,7 @@ class ProductService {
     return undefined;
   }
   // delete test case
-  async DeleteTCItem({
+  async deleteTCItem({
     id,
   }: {
     id: number | undefined;
@@ -197,7 +197,7 @@ class ProductService {
   }
 
   // delete test case
-  async DeleteTC({ id }: { id: number }): Promise<number | undefined> {
+  async deleteTC({ id }: { id: number }): Promise<number | undefined> {
     try {
       const res = await axios.delete(`/page/${id}`);
       return res.data.data;
@@ -207,7 +207,7 @@ class ProductService {
     return undefined;
   }
 
-  async AnswerTCItem({
+  async answerTCItem({
     id,
     contents,
   }: IAnswerTCItemProps): Promise<IAnswerTCItem | undefined> {

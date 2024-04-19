@@ -2,26 +2,54 @@ import { CustomCard2 } from "@/src/components/cards/CustomCard2";
 import { CustomToggleButton1 } from "@/src/components/toggleButton";
 import { useMobile } from "@/src/hooks";
 import { IQATargetItem } from "@/src/services/products/types";
-import { Stack } from "@mui/material";
+import { Stack, Typography, useTheme } from "@mui/material";
 import Image from "next/image";
 
 const Contents = ({ lists, img }: { lists: IQATargetItem[]; img: string }) => {
   const { isMobile } = useMobile();
+  const theme = useTheme();
 
   const imageLoader = ({ src }: { src: string }) => {
     return `https://dev-detaiez.s3.ap-northeast-2.amazonaws.com/${src}`;
   };
 
   return (
-    <Stack direction={isMobile ? "column" : "row"} spacing={1}>
+    <Stack
+      direction={isMobile ? "column" : "row"}
+      spacing={2}
+      p={theme.typography.pxToRem(20)}
+    >
       <CustomCard2>
-        {!!lists.length &&
-          lists.map((item) => (
-            <Stack direction="column" spacing={1} key={item.id}>
-              {item.contents}
-              <CustomToggleButton1 id={item.id} value={item.status} />
-            </Stack>
-          ))}
+        <Stack direction="column" spacing={3.8}>
+          {!!lists.length &&
+            lists.map((item, idx) => (
+              <Stack direction="column" spacing={2} key={item.id}>
+                <Stack direction="row" spacing={1.5}>
+                  <Stack
+                    width={28}
+                    height={28}
+                    justifyContent="center"
+                    alignItems="center"
+                    sx={{
+                      bgcolor: "deGreen.1",
+                      borderRadius: "30px",
+                      minWidth: "28px",
+                      color: "white",
+                    }}
+                  >
+                    {idx}
+                  </Stack>
+                  <Typography color="deGray.1" sx={{ pt: "1px" }}>
+                    {item.contents}
+                  </Typography>
+                </Stack>
+
+                <Stack sx={{ pl: 4 }}>
+                  <CustomToggleButton1 id={item.id} value={item.status} />
+                </Stack>
+              </Stack>
+            ))}
+        </Stack>
       </CustomCard2>
       <CustomCard2>
         <Image

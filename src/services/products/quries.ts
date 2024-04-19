@@ -1,6 +1,7 @@
 import { productStatus } from "@/src/datas";
 import productService from "./productService";
 import { IAnswerTCItemProps } from "./types";
+import { keepPreviousData } from "@tanstack/react-query";
 
 const queryKeys = {
   all: ["products"] as const,
@@ -18,10 +19,12 @@ const queryOptions = {
   products: ({ status }: { status: productStatus }) => ({
     queryKey: queryKeys.products(status),
     queryFn: () => productService.getProducts({ status }),
+    placeholderData: keepPreviousData,
   }),
   product: ({ productId }: { productId: number }) => ({
     queryKey: queryKeys.product(productId),
     queryFn: () => productService.getProduct({ productId }),
+    placeholderData: keepPreviousData,
   }),
   deleteProdcut: ({
     productId,
@@ -69,19 +72,21 @@ const queryOptions = {
   productQAList: ({ productId }: { productId: number }) => ({
     queryKey: queryKeys.productQAList(productId),
     queryFn: () => productService.getProductQAList({ productId }),
+    placeholderData: keepPreviousData,
   }),
   productQATarget: ({ id }: { id: number | undefined }) => ({
     queryKey: queryKeys.productQAItem(id),
     queryFn: () => productService.getProductQAItem({ id }),
     enabled: !!id,
+    placeholderData: keepPreviousData,
   }),
   saveProduct: ({ onSuccess }: { onSuccess?: any }) => ({
     mutationFn: ({ id, status }: { id: number; status: string }) =>
-      productService.SaveProduct({ id, status }),
+      productService.saveProduct({ id, status }),
     onSuccess: onSuccess,
   }),
   endProduct: ({ onSuccess }: { onSuccess?: any }) => ({
-    mutationFn: ({ id }: { id: number }) => productService.EndProduct({ id }),
+    mutationFn: ({ id }: { id: number }) => productService.endProduct({ id }),
     onSuccess: onSuccess,
   }),
   updatetcItem: ({
@@ -98,20 +103,20 @@ const queryOptions = {
     onSuccess: onSuccess,
   }),
   addtcItem: ({ onSuccess }: { onSuccess?: any }) => ({
-    mutationFn: ({ id }: { id: number }) => productService.AddTCItem({ id }),
+    mutationFn: ({ id }: { id: number }) => productService.addTCItem({ id }),
     onSuccess: onSuccess,
   }),
   deletetcItem: ({ onSuccess }: { onSuccess?: any }) => ({
-    mutationFn: ({ id }: { id: number }) => productService.DeleteTCItem({ id }),
+    mutationFn: ({ id }: { id: number }) => productService.deleteTCItem({ id }),
     onSuccess: onSuccess,
   }),
   deletetc: ({ onSuccess }: { onSuccess?: any }) => ({
-    mutationFn: ({ id }: { id: number }) => productService.DeleteTC({ id }),
+    mutationFn: ({ id }: { id: number }) => productService.deleteTC({ id }),
     onSuccess: onSuccess,
   }),
   answertcItem: ({ onSuccess }: { onSuccess?: any }) => ({
     mutationFn: ({ id, contents }: IAnswerTCItemProps) =>
-      productService.AnswerTCItem({ id, contents }),
+      productService.answerTCItem({ id, contents }),
     onSuccess: onSuccess,
   }),
 };

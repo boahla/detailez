@@ -1,45 +1,59 @@
 "use client";
-import { experimental_extendTheme as extendTheme } from "@mui/material/styles";
+import { ThemeOptions, createTheme } from "@mui/material/styles";
 import { palettes } from "./palette";
+import components from "./components";
 
 declare module "@mui/material/styles" {
-  interface PaletteOptions {
-    black: string;
-    deBlack: string;
-    deGray1: string;
-    deGray2: string;
-    deGray3: string;
-    deGray4: string;
-    deGreen1: string;
-    deGreen2: string;
-    deGreen3: string;
-    deGreen4: string;
-    dePurple1: string;
-    dePurple2: string;
-    deError: string;
-    dePrimary: string;
+  type colorDepth = 1 | 2 | 3 | 4;
+  interface colorOptions {
+    main: string;
+    light?: string;
+    dark?: string;
+    1?: string;
+    2?: string;
+    3?: string;
+    4?: string;
+    5?: string;
+    bg?: string;
   }
   interface Palette {
-    black: string;
-    deBlack: string;
-    deGray1: string;
-    deGray2: string;
-    deGray3: string;
-    deGray4: string;
-    deGreen1: string;
-    deGreen2: string;
-    deGreen3: string;
-    deGreen4: string;
-    dePurple1: string;
-    dePurple2: string;
-    deError: string;
-    dePrimary: string;
+    black: colorOptions;
+    deBlack: colorOptions;
+    deGray: colorOptions;
+    deGreen: colorOptions;
+    dePurple: colorOptions;
+    deError: colorOptions;
+    dePrimary: colorOptions;
+  }
+  interface PaletteOptions {
+    black: colorOptions;
+    deBlack: colorOptions;
+    deGray: colorOptions;
+    deGreen: colorOptions;
+    dePurple: colorOptions;
+    deError: colorOptions;
+    dePrimary: colorOptions;
   }
 }
 
-const defaultTheme = extendTheme({
-  colorSchemes: palettes,
-  // components:
-});
+declare module "@mui/material/Button" {
+  interface ButtonPropsVariantOverrides {
+    rounded: true;
+    greyOutlined: true;
+  }
+  interface ButtonPropsSizeOverrides {
+    "extra-small": true;
+  }
+  interface ButtonPropsColorOverrides {
+    deGreen: true;
+  }
+}
+
+const themeOptions = {
+  palette: palettes,
+  components: components,
+} as ThemeOptions;
+
+const defaultTheme = createTheme(themeOptions);
 
 export default defaultTheme;

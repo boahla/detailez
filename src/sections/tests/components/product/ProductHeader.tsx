@@ -1,21 +1,31 @@
+import { ProductStatusChip } from "@/src/components/chips";
 import { IProductReportItem } from "@/src/services/reports/types";
-import { Chip, Stack } from "@mui/material";
+import { Stack } from "@mui/material";
 
+// status === "start"
+// ? { label: "테스트 중", type: "emphasis" }
+// : status === "end"
+// ? { label: "프로젝트 완료", type: "disabled" }
+// : status === "ing"
+// ? { label: "QA 생성중", type: "default" }
+// : { label: "-", type: "disabled" };
 const ProductHeader = ({ item }: { item: IProductReportItem }) => {
   const testStatus =
     item.status === "complete"
-      ? "프로젝트 완료"
+      ? { label: "프로젝트 완료", type: "disabled" }
       : item.status === "end"
-      ? "테스트 완료"
+      ? { label: "테스트 완료", type: "disabled" }
       : item.status === "ing"
-      ? "테스트 중"
+      ? { label: "테스트 중", type: "default" }
       : item.status === "invite"
-      ? "새 초대"
-      : undefined;
+      ? { label: "새 초대", type: "emphasis" }
+      : { label: "-", type: "disabled" };
 
   return (
     <Stack direction="row" justifyContent="space-between" alignItems="center">
-      {!!testStatus && <Chip label={testStatus} />}
+      {!!testStatus && (
+        <ProductStatusChip type={testStatus.type} label={testStatus.label} />
+      )}
     </Stack>
   );
 };

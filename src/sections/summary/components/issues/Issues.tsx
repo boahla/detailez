@@ -1,12 +1,14 @@
 import { useGetReportStatus } from "@/src/services/reports/useProducts";
 import {
   Box,
+  Stack,
   Table,
   TableBody,
   TableCell,
   TableContainer,
   TableHead,
   TableRow,
+  Typography,
 } from "@mui/material";
 import { useParams } from "next/navigation";
 import { useState } from "react";
@@ -43,35 +45,39 @@ const Issues = () => {
   };
   return (
     <CustomCard1>
-      <Box>이슈 리스트</Box>
-      <TableContainer>
-        <Table>
-          <TableHead>
-            <TableRow>
-              {IssueColumns.map((column) => (
-                <TableCell
-                  key={column.id}
-                  // align={column.align}
-                  // style={{ minWidth: column.minWidth }}
-                >
-                  {column.label}
-                </TableCell>
-              ))}
-            </TableRow>
-          </TableHead>
-          <TableBody>
-            {data.map((item, idx) => (
-              <TableRow key={idx}>
+      <Stack direction="column" spacing={2}>
+        <Box>
+          <Typography color="dePurple.1">이슈 리스트</Typography>
+        </Box>
+        <TableContainer>
+          <Table>
+            <TableHead>
+              <TableRow>
                 {IssueColumns.map((column) => (
-                  <TableCell key={column.id}>
-                    {tablecellItem(column, item)}
+                  <TableCell
+                    key={column.id}
+                    // align={column.align}
+                    // style={{ minWidth: column.minWidth }}
+                  >
+                    {column.label}
                   </TableCell>
                 ))}
               </TableRow>
-            ))}
-          </TableBody>
-        </Table>
-      </TableContainer>
+            </TableHead>
+            <TableBody>
+              {data.map((item, idx) => (
+                <TableRow key={idx}>
+                  {IssueColumns.map((column) => (
+                    <TableCell key={column.id}>
+                      {tablecellItem(column, item)}
+                    </TableCell>
+                  ))}
+                </TableRow>
+              ))}
+            </TableBody>
+          </Table>
+        </TableContainer>
+      </Stack>
     </CustomCard1>
   );
 };

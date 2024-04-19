@@ -20,6 +20,7 @@ const Sidebar = ({ open, children }: SidebarProps) => {
 const CustomDrawer = styled(Drawer)(({ theme }) => ({
   width: LAYOUTS_NUMBERS.drawerWidth,
   flexShrink: 0,
+  position: "relative",
   "& .MuiDrawer-paper": {
     width: LAYOUTS_NUMBERS.drawerWidth,
     boxSizing: "border-box",

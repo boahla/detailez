@@ -56,8 +56,8 @@ const Header = ({ open, onClick }: HeaderProps) => {
             onClick={onClick}
             edge="start"
             sx={{
-              bgcolor: `${theme.palette.deGreen3} !important`,
-              color: "dePurple1",
+              bgcolor: `${theme.palette.deGreen[4]} !important`,
+              color: "dePurple.1",
               borderRadius: "10px",
             }}
           >

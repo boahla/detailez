@@ -1,12 +1,18 @@
 import { useDialogs } from "@/src/hooks";
 import { IQAListItem } from "@/src/services/products/types";
-import { Button, IconButton, Stack } from "@mui/material";
+import { Button, IconButton, Stack, useTheme } from "@mui/material";
 import Image from "next/image";
 import ImageUploadDialog from "./ImageUploadDialog";
 import axios from "axios";
 import uploadService from "@/src/services/uploads/uploadService";
 import { useParams } from "next/navigation";
-import { Close } from "@mui/icons-material";
+import {
+  CancelRounded,
+  Close,
+  CloseRounded,
+  RemoveCircleRounded,
+} from "@mui/icons-material";
+import { MouseEventHandler } from "react";
 
 const ProductTCImageLists = ({
   lists,
@@ -14,13 +20,16 @@ const ProductTCImageLists = ({
   load,
   isEdit = false,
   onDelete,
+  target,
 }: {
   lists: IQAListItem[] | undefined;
   onClickItem: (idx: number) => void;
   onDelete?: any;
   load?: any;
   isEdit?: boolean;
+  target?: number;
 }) => {
+  const theme = useTheme();
   const { productId } = useParams();
   const [dialogs, handleOpenDialog, handleCloseDialog] = useDialogs({
     upload: false,
@@ -56,7 +65,7 @@ const ProductTCImageLists = ({
           presignedUpload(cur, imgData.formInput);
       })
     ).then(() => {
-      handleCloseDialog("upload")();
+      handleCloseDialog("upload");
       load();
     });
   };
@@ -77,15 +86,7 @@ const ProductTCImageLists = ({
   };
 
   return (
-    <Stack direction="column" spacing={1} p={1}>
-      {isEdit && (
-        <Stack>
-          <Button onClick={() => handleOpenDialog("upload")()}>
-            이미지 업로드
-          </Button>
-        </Stack>
-      )}
-
+    <Stack direction="column" spacing={1} pl={2}>
       {lists?.map((item: any, idx: any) => (
         <Stack
           onClick={() => onClickItem(idx)}
@@ -95,6 +96,10 @@ const ProductTCImageLists = ({
             height: "140px",
             overflow: "hidden",
             position: "relative",
+            ...(target === item.id && {
+              border: `solid 2px ${theme.palette.dePurple[1]}`,
+              borderRadius: "10px",
+            }),
           }}
         >
           <Image
@@ -114,17 +119,37 @@ const ProductTCImageLists = ({
 
           {!!onDelete && (
             <IconButton
-              sx={{ position: "absolute", right: 0 }}
-              onClick={() => onCancel(item.id)}
+              sx={{ position: "absolute", right: 0, p: 0, top: 0 }}
+              onClick={(e) => {
+                onCancel(item.id);
+                e.stopPropagation();
+              }}
             >
-              <Close />
+              <CancelRounded />
             </IconButton>
           )}
         </Stack>
       ))}
+      {isEdit && (
+        <Stack
+          sx={{
+            position: "absolute",
+            bottom: 0,
+            left: 0,
+            right: 0,
+            bgcolor: "white",
+            pl: 2,
+            py: 2,
+          }}
+        >
+          <Button onClick={() => handleOpenDialog("upload")} fullWidth>
+            이미지 추가
+          </Button>
+        </Stack>
+      )}
       <ImageUploadDialog
         open={!!dialogs?.upload}
-        onClose={() => handleCloseDialog("upload")()}
+        onClose={() => handleCloseDialog("upload")}
         onSubmit={onImageUpalod}
       />
     </Stack>

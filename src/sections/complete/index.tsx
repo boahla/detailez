@@ -29,7 +29,7 @@ const Complete = ({}) => {
   const onChangeTarget = useCallback(
     (index: number) => {
       if (!!QAList) {
-        setTarget(QAList[index].id);
+        setTarget(QAList[index]?.id);
         setTarIndex(index);
       }
     },
@@ -52,22 +52,20 @@ const Complete = ({}) => {
   return (
     <CommonLayout
       sidebar={
-        <ProductTCImageLists lists={QAList} onClickItem={onChangeTarget} />
+        <ProductTCImageLists
+          lists={QAList}
+          onClickItem={onChangeTarget}
+          target={Number(target)}
+        />
       }
     >
       <Card elevation={0} sx={{ bgcolor: "transparent" }} key={target}>
         {targetData && (
-          <CustomCard1>
+          <CustomCard1 key={target} sx={{ p: 0 }}>
             <Header name={productDetail?.name} />
-            {!isTargetLoading &&
-              !isTargetRefetching &&
-              !!targetData &&
-              QAList && (
-                <Contents
-                  lists={targetData.lists}
-                  img={QAList[tarIndex]?.path}
-                />
-              )}
+            {QAList && (
+              <Contents lists={targetData.lists} img={QAList[tarIndex]?.path} />
+            )}
             <Stack direction={isMobile ? "column" : "row"} spacing={1}></Stack>
           </CustomCard1>
         )}

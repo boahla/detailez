@@ -1,16 +1,28 @@
 import { TC_STATUS_TYPES } from "@/src/datas/products";
-import { styled } from "@mui/material/styles";
+import { Typography } from "@mui/material";
+import { styled, useTheme } from "@mui/material/styles";
 import ToggleButton from "@mui/material/ToggleButton";
 import ToggleButtonGroup, {
   toggleButtonGroupClasses,
 } from "@mui/material/ToggleButtonGroup";
 import { useState } from "react";
 
+type ButtonTypeProps = "pass" | "cancel" | "hold" | "error" | null;
+
 const StyledToggleButtonGroup = styled(ToggleButtonGroup)(({ theme }) => ({
+  height: theme.typography.pxToRem(28),
   [`& .${toggleButtonGroupClasses.grouped}`]: {
-    margin: theme.spacing(0.5),
+    marginRight: theme.spacing(1),
     border: 0,
-    borderRadius: theme.shape.borderRadius,
+    borderRadius: "30px",
+    padding: "2px 8px",
+    backgroundColor: theme.palette.deGray[4],
+    color: theme.palette.dePurple[1],
+    "& svg": {
+      width: "20px",
+      height: "20px",
+      marginRight: "4px",
+    },
     [`&.${toggleButtonGroupClasses.disabled}`]: {
       border: 0,
     },
@@ -29,8 +41,10 @@ const CustomToggleButton1 = ({
 }: {
   onChange?: any;
   id: number;
-  value: "pass" | "cancel" | "hold" | "error" | null;
+  value: ButtonTypeProps;
 }) => {
+  const theme = useTheme();
+
   const [alignment, setAlignment] = useState(value);
 
   const handleAlignment = (
@@ -56,8 +70,46 @@ const CustomToggleButton1 = ({
           value={item.value}
           aria-label={item.value}
           disableRipple={!onChange}
+          sx={{
+            ...(item.value === alignment && {
+              border: `solid 1px ${
+                item.value === "pass"
+                  ? theme.palette.deGreen[1]
+                  : item.value === "cancel"
+                  ? theme.palette.deGray[1]
+                  : item.value === "hold"
+                  ? theme.palette.dePrimary.main
+                  : item.value === "error"
+                  ? theme.palette.deError.main
+                  : "black"
+              } !important`,
+              color: `${
+                item.value === "pass"
+                  ? theme.palette.deGreen[1]
+                  : item.value === "cancel"
+                  ? theme.palette.deGray[1]
+                  : item.value === "hold"
+                  ? theme.palette.dePrimary.main
+                  : item.value === "error"
+                  ? theme.palette.deError.main
+                  : "black"
+              } !important`,
+              bgcolor: `${
+                item.value === "pass"
+                  ? theme.palette.deGreen[4]
+                  : item.value === "cancel"
+                  ? theme.palette.deGray[4]
+                  : item.value === "hold"
+                  ? theme.palette.dePrimary.bg
+                  : item.value === "error"
+                  ? theme.palette.deError.bg
+                  : "black"
+              } !important`,
+            }),
+          }}
         >
-          {item.label}
+          {item.value === alignment && item.icon}
+          <Typography>{item.label}</Typography>
         </ToggleButton>
       ))}
     </StyledToggleButtonGroup>

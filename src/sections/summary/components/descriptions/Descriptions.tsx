@@ -2,7 +2,7 @@ import { CustomCard1 } from "@/src/components/cards";
 import { useDialogs, useMobile } from "@/src/hooks";
 import { IProductItem } from "@/src/services/products/types";
 import { useEndProduct } from "@/src/services/products/useProducts";
-import { Button, Stack } from "@mui/material";
+import { Button, Stack, Typography, useTheme } from "@mui/material";
 import { useParams, useRouter } from "next/navigation";
 import { ReactNode } from "react";
 import ProductEndDialog from "../dialogs/ProductEndDialog";
@@ -16,6 +16,7 @@ const Descriptions = ({
   isLoading: boolean;
   isOwn: boolean;
 }) => {
+  const theme = useTheme();
   const { isMobile } = useMobile();
   const router = useRouter();
   const { productId } = useParams();
@@ -44,7 +45,7 @@ const Descriptions = ({
           {data.status === "start" && (
             <Button
               variant="contained"
-              sx={{ color: "green" }}
+              sx={{ color: "deGreen.1", height: theme.typography.pxToRem(44) }}
               onClick={() => router.push(`/testcase/${productId}`)}
             >
               테스트 시작
@@ -53,7 +54,11 @@ const Descriptions = ({
           {data.status === "end" && (
             <Button
               variant="contained"
-              sx={{ color: "green" }}
+              sx={{
+                bgcolor: "dePurple.1",
+                color: "white",
+                height: theme.typography.pxToRem(44),
+              }}
               onClick={() => router.push(`/complete/${productId}`)}
             >
               qa 결과 상세보기
@@ -62,9 +67,9 @@ const Descriptions = ({
           {data.status === "start" && isOwn && (
             <Button
               variant="contained"
-              sx={{ color: "green" }}
+              sx={{ color: "green", height: theme.typography.pxToRem(44) }}
               onClick={() => {
-                handleOpenDialog("end")();
+                handleOpenDialog("end");
               }}
             >
               프로젝트 qa 종료
@@ -74,10 +79,10 @@ const Descriptions = ({
       </Stack>
       <ProductEndDialog
         open={!!dialogs?.end}
-        onCancel={() => handleCloseDialog("end")()}
+        onCancel={() => handleCloseDialog("end")}
         onSubmit={() => {
           handleEndProduct({ id: Number(productId) });
-          handleCloseDialog("end")();
+          handleCloseDialog("end");
           router.push(`/products`);
         }}
       />
@@ -95,8 +100,12 @@ const DescForms = ({
 }) => {
   return (
     <Stack direction="row" spacing={2}>
-      <Stack width={100}>{label}</Stack>
-      <Stack>{children}</Stack>
+      <Stack width={100}>
+        <Typography color="dePurple.1">{label}</Typography>
+      </Stack>
+      <Stack>
+        <Typography color="deGray.1">{children}</Typography>
+      </Stack>
     </Stack>
   );
 };

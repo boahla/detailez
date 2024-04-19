@@ -1,5 +1,5 @@
 import { Chip } from "@mui/material";
-import StatusChip from "./StatusChip";
+import StatusChip from "./ProductStatusChip";
 import type { Meta, StoryObj } from "@storybook/react";
 
 const meta = {

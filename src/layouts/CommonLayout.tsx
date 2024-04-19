@@ -1,6 +1,6 @@
 // "use client";
 import "@/src/styles/globals.css";
-import { styled } from "@mui/material/styles";
+import { styled, useTheme } from "@mui/material/styles";
 import { ReactNode, useState } from "react";
 import Box from "@mui/material/Box";
 import { DrawerHeader, Header, Sidebar } from "@/src/components/layouts";
@@ -18,6 +18,7 @@ export default function CommonLayout({
   const handleDrawerOpen = () => setOpen(true);
   const handleDrawerClose = () => setOpen(false);
 
+  const theme = useTheme();
   return (
     <LayoutContext.Provider
       value={{
@@ -60,8 +61,8 @@ const Main = styled("main", { shouldForwardProp: (prop) => prop !== "open" })<{
   }),
 }));
 
-const CardMain = styled(Box)<{}>(({ theme }) => ({
-  backgroundColor: theme.palette.deGray4,
+const CardMain = styled(Box)(({ theme }) => ({
+  backgroundColor: theme.palette.deGray[4],
   padding: theme.spacing(3),
   borderTopRightRadius: "10px",
   borderTopLeftRadius: "10px",

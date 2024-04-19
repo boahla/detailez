@@ -29,6 +29,7 @@ const ContentsTextfield = ({
         value={value}
         onChange={(e) => setValue(e.target.value)}
         onBlur={onBlur}
+        placeholder="Test Case를 작성하세요."
         InputProps={{
           endAdornment: (
             <InputAdornment position="end">
@@ -37,6 +38,15 @@ const ContentsTextfield = ({
               </IconButton>
             </InputAdornment>
           ),
+        }}
+        sx={{
+          bgcolor: "deGray.5",
+          "& fieldset": {
+            border: "none",
+          },
+          "& .MuiInputAdornment-root": {
+            "& svg": { color: "deGray.3" },
+          },
         }}
       />
     </Stack>

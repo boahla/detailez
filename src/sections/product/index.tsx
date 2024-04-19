@@ -14,13 +14,13 @@ import Contents from "./components/Contents";
 import { Formik, FormikHelpers, FormikValues } from "formik";
 import Footer from "./components/Footer";
 import CommonLayout from "@/src/layouts/CommonLayout";
-import { useDialogs } from "@/src/hooks";
 import { ProductTCImageLists } from "@/src/components/product";
 
 const Product = ({}) => {
   const { productId } = useParams();
   const [target, setTarget] = useState<number>();
   const [tarIndex, setTarIndex] = useState<number>(0);
+  const [targetKey, setTargetKey] = useState<any>(1);
   const { data: productDetail } = useGetProduct({
     productId: Number(productId),
   });
@@ -35,8 +35,9 @@ const Product = ({}) => {
   const onChangeTarget = useCallback(
     (index: number) => {
       if (!!QAList) {
-        setTarget(QAList[index].id);
+        setTarget(QAList[index]?.id);
         setTarIndex(index);
+        setTargetKey(Math.random());
       }
     },
     [QAList]
@@ -48,12 +49,9 @@ const Product = ({}) => {
     }
   }, [QAList, isQASuccess, onChangeTarget]);
 
-  const {
-    data: targetData,
-    isLoading: isTargetLoading,
-    refetch: loadhandleTarget,
-    isRefetching: isTargetRefetching,
-  } = useGetProductQATarget({ id: target });
+  const { data: targetData, refetch: loadhandleTarget } = useGetProductQATarget(
+    { id: target }
+  );
   const { mutate: handleDeleteTC } = useDeleteTC({
     onSuccess: () => loadProductQAList(),
   });
@@ -67,10 +65,11 @@ const Product = ({}) => {
           onDelete={handleDeleteTC}
           load={loadProductQAList}
           isEdit={true}
+          target={Number(target)}
         />
       }
     >
-      <Card elevation={0} sx={{ bgcolor: "transparent" }} key={target}>
+      <Card elevation={0} sx={{ bgcolor: "transparent" }} key={targetKey}>
         {targetData && (
           <Formik
             initialValues={targetData.lists}
@@ -81,26 +80,22 @@ const Product = ({}) => {
               throw new Error("Function not implemented.");
             }}
           >
-            <Stack direction="column" spacing={3} p={3}>
-              <CustomCard1>
+            <Stack direction="column" spacing={3}>
+              <CustomCard1 sx={{ p: 0 }}>
                 <Header name={productDetail?.name} />
-                {!isTargetLoading &&
-                  !isTargetRefetching &&
-                  !!targetData &&
-                  QAList &&
-                  target && (
-                    <Contents
-                      lists={targetData.lists}
-                      img={QAList[tarIndex]?.path}
-                      target={Number(target)}
-                      load={loadhandleTarget}
-                    />
-                  )}
+                {QAList && target && (
+                  <Contents
+                    lists={targetData.lists}
+                    img={QAList[tarIndex]?.path}
+                    target={Number(target)}
+                    load={loadhandleTarget}
+                  />
+                )}
               </CustomCard1>
             </Stack>
           </Formik>
         )}
-        <Footer />
+        {/* <Footer /> */}
       </Card>
     </CommonLayout>
   );

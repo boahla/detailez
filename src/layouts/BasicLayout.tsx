@@ -30,21 +30,21 @@ export default function BasicLayout({ children }: { children: ReactNode }) {
               onClick={() => handleRouteSidebar(item)}
               sx={{
                 borderRadius: "10px",
-                color: "dePurple1",
+                color: "dePurple.1",
                 mb: 1,
                 "& svg": {
-                  color: "dePurple1",
+                  color: "dePurple.1",
                 },
                 "& .MuiButtonBase-root:hover": {
                   borderRadius: "10px",
                 },
                 ...(item.route === path && {
-                  bgcolor: "deGray4",
+                  bgcolor: "deGray.4",
                 }),
               }}
             >
               <ListItemButton>
-                <ListItemIcon sx={{ minWidth: "24px !important", mr: 1 }}>
+                <ListItemIcon sx={{ minWidth: "24px !important", mr: 1.5 }}>
                   {item.icon}
                 </ListItemIcon>
                 <ListItemText primary={item.label} />
