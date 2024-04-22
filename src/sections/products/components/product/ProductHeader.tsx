@@ -11,6 +11,8 @@ import {
   useTheme,
 } from "@mui/material";
 import { MouseEvent, useState } from "react";
+import InviteTesterDialog from "../dialogs/InviteTesterDialog";
+import { useDialogs } from "@/src/hooks";
 
 const testStatus = (status: string) =>
   status === "start"
@@ -34,6 +36,9 @@ const ProductHeader = ({
   onCopyStatus,
 }: IProductHeader) => {
   const theme = useTheme();
+  const [dialogs, handleOpenDialog, handleCloseDialog] = useDialogs({
+    invite: false,
+  });
   const [anchorEl, setAnchorEl] = useState<null | HTMLElement>(null);
   const open = Boolean(anchorEl);
   const handleClick = (event: MouseEvent<HTMLButtonElement>) =>
@@ -52,6 +57,12 @@ const ProductHeader = ({
 
   const handleCopyStatus = () => {
     onCopyStatus();
+    handleClose();
+  };
+
+  const onCloseInviteTester = () => handleCloseDialog("invite");
+  const onOpenInviteTester = () => {
+    handleOpenDialog("invite");
     handleClose();
   };
 
@@ -106,10 +117,17 @@ const ProductHeader = ({
           <MenuItem onClick={handleClose}>설명 변경</MenuItem>
         )}
         {item.status !== "end" && (
-          <MenuItem onClick={handleClose}>테스터 초대하기</MenuItem>
+          <MenuItem onClick={onOpenInviteTester}>테스터 초대하기</MenuItem>
         )}
         <MenuItem onClick={handleCancel}>삭제</MenuItem>
       </Menu>
+      {!!dialogs?.invite && (
+        <InviteTesterDialog
+          open={!!dialogs?.invite}
+          onCancel={onCloseInviteTester}
+          itemId={item.id}
+        />
+      )}
     </Stack>
   );
 };

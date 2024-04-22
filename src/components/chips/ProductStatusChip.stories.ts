@@ -16,21 +16,21 @@ type Story = StoryObj<typeof meta>;
 
 export const Default: Story = {
   args: {
-    status: "default",
+    type: "default",
     label: "default Chip",
   },
 };
 
 export const Disabled: Story = {
   args: {
-    status: "disabled",
+    type: "disabled",
     label: "disabled Chip",
   },
 };
 
 export const Emphasis: Story = {
   args: {
-    status: "emphasis",
+    type: "emphasis",
     label: "emphasis Chip",
   },
 };

@@ -6,6 +6,7 @@ import { Button, Stack, Typography, useTheme } from "@mui/material";
 import { useParams, useRouter } from "next/navigation";
 import { ReactNode } from "react";
 import ProductEndDialog from "../dialogs/ProductEndDialog";
+import InviteTesterDialog from "@/src/sections/products/components/dialogs/InviteTesterDialog";
 
 const Descriptions = ({
   data,
@@ -23,6 +24,7 @@ const Descriptions = ({
 
   const [dialogs, handleOpenDialog, handleCloseDialog] = useDialogs({
     end: false,
+    invite: false,
   });
 
   const { mutate: handleEndProduct } = useEndProduct({});
@@ -42,6 +44,15 @@ const Descriptions = ({
           <DescForms label="TC 작성자">{data.email}</DescForms>
         </Stack>
         <Stack direction={"row"} spacing={1} alignItems="start">
+          {data.status === "start" && isOwn && (
+            <Button
+              variant="contained"
+              sx={{ color: "deGreen.1", height: theme.typography.pxToRem(44) }}
+              onClick={() => handleOpenDialog("invite")}
+            >
+              초대하기
+            </Button>
+          )}
           {data.status === "start" && (
             <Button
               variant="contained"
@@ -77,6 +88,11 @@ const Descriptions = ({
           )}
         </Stack>
       </Stack>
+      <InviteTesterDialog
+        open={!!dialogs?.invite}
+        onCancel={() => handleCloseDialog("invite")}
+        itemId={Number(productId)}
+      />
       <ProductEndDialog
         open={!!dialogs?.end}
         onCancel={() => handleCloseDialog("end")}

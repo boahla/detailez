@@ -11,6 +11,22 @@ class InviteService {
       console.log("error", { err });
     }
   }
+  // invite testers
+  async InviteTesters({
+    id,
+    email,
+  }: {
+    id: number | string;
+    email: string[];
+  }): Promise<void> {
+    try {
+      await axios.post(`/report/invite/${id}`, {
+        email,
+      });
+    } catch (err) {
+      console.log("error", { err });
+    }
+  }
 }
 
 // eslint-disable-next-line import/no-anonymous-default-export
