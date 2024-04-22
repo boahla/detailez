@@ -47,7 +47,9 @@ const Issues = () => {
     <CustomCard1>
       <Stack direction="column" spacing={2}>
         <Box>
-          <Typography color="dePurple.1">이슈 리스트</Typography>
+          <Typography color="dePurple.1" variant="nm-bold">
+            이슈 리스트
+          </Typography>
         </Box>
         <TableContainer>
           <Table>

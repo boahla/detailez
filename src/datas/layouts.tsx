@@ -10,13 +10,13 @@ const LAYOUTS_NUMBERS = {
 
 const LAYOUT_SIDEBAR_MENUS = [
   {
-    label: "관리중 프로젝트",
+    label: "프로젝트 관리",
     value: "management",
     route: "/products",
     icon: <FormatListBulletedOutlined />,
   },
   {
-    label: "테스트 프로젝트",
+    label: "초대된 프로젝트",
     value: "tests",
     route: "/tests",
     icon: <ChecklistOutlined />,

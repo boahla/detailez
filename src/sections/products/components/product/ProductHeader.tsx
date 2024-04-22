@@ -101,6 +101,7 @@ const ProductHeader = ({
         sx={{
           "& .MuiButtonBase-root": {
             color: "deGray.1",
+            ...theme.typography["nm-regular"],
           },
         }}
       >

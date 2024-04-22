@@ -39,9 +39,15 @@ const Descriptions = ({
         justifyContent="space-between"
       >
         <Stack direction="column" spacing={2}>
-          <DescForms label="프로젝트명">{data.name}</DescForms>
-          <DescForms label="추가 설명">{data.contents}</DescForms>
-          <DescForms label="TC 작성자">{data.email}</DescForms>
+          <DescForms label="프로젝트명" childrenVariant="lg-bold">
+            {data.name}
+          </DescForms>
+          <DescForms label="추가 설명" childrenVariant="md-regular">
+            {data.contents}
+          </DescForms>
+          <DescForms label="TC 작성자" childrenVariant="md-regular">
+            {data.email}
+          </DescForms>
         </Stack>
         <Stack direction={"row"} spacing={1} alignItems="start">
           {data.status === "start" && isOwn && (
@@ -110,17 +116,23 @@ export default Descriptions;
 const DescForms = ({
   label,
   children,
+  childrenVariant,
 }: {
   label: string;
   children: ReactNode;
+  childrenVariant: "lg-bold" | "md-regular";
 }) => {
   return (
-    <Stack direction="row" spacing={2}>
-      <Stack width={100}>
-        <Typography color="dePurple.1">{label}</Typography>
+    <Stack direction="row" spacing={2} alignItems="center">
+      <Stack width={80}>
+        <Typography color="dePurple.1" variant="nm-regular">
+          {label}
+        </Typography>
       </Stack>
       <Stack>
-        <Typography color="deGray.1">{children}</Typography>
+        <Typography color="deGray.1" variant={childrenVariant}>
+          {children}
+        </Typography>
       </Stack>
     </Stack>
   );

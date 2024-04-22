@@ -56,7 +56,7 @@ const Contents = ({ lists, img }: { lists: IQATargetItem[]; img: string }) => {
                       color: "white",
                     }}
                   >
-                    {idx}
+                    {idx + 1}
                   </Stack>
                   <Typography color="deGray.1" sx={{ pt: "1px" }}>
                     {item.contents}

@@ -52,7 +52,9 @@ const Testers = () => {
     <CustomCard1>
       <Stack direction="column" spacing={2}>
         <Box>
-          <Typography color="dePurple.1">참여한 테스터</Typography>
+          <Typography color="dePurple.1" variant="nm-bold">
+            참여한 테스터
+          </Typography>
         </Box>
         <TableContainer>
           <Table>

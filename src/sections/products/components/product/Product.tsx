@@ -100,15 +100,16 @@ const Product = ({ item, load }: IProduct) => {
               WebkitLineClamp: "2", // 원하는 라인수
               WebkitBoxOrient: "vertical",
               color: "deGray.1",
+              // ...theme.typography["nm-bold"],
             }}
           >
-            {item.name}
+            <Typography variant="nm-bold">{item.name}</Typography>
           </Stack>
 
-          <Typography color="deGray.1">
+          <Typography color="deGray.1" variant="nm-regular">
             {!!item.contents ? item.contents : "추가 설명 없음"}
           </Typography>
-          <Typography color="deGray.2">
+          <Typography color="deGray.2" variant="nm-regular">
             {formatDate({ date: item.created_at })}
           </Typography>
         </Stack>

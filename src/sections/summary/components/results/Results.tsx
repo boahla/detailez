@@ -26,10 +26,20 @@ const Results = ({
     <CustomCard1>
       <Stack direction="column" spacing={2}>
         <Box>
-          <Typography color="dePurple.1">테스트 결과</Typography>
+          <Typography color="dePurple.1" variant="nm-regular">
+            테스트 결과
+          </Typography>
         </Box>
         <Box>
-          <Grid container spacing={4}>
+          <Grid
+            container
+            spacing={4}
+            sx={{
+              "& .MuiTypography-root ": {
+                ...theme.typography["nm-bold"],
+              },
+            }}
+          >
             <GridCard
               sx={{
                 border: `solid 1px ${theme.palette.dePurple[1]}`,

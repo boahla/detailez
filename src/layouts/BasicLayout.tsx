@@ -8,12 +8,14 @@ import {
   ListItemButton,
   ListItemIcon,
   ListItemText,
+  useTheme,
 } from "@mui/material";
 import { usePathname, useRouter } from "next/navigation";
 
 export default function BasicLayout({ children }: { children: ReactNode }) {
   const router = useRouter();
   const path = usePathname();
+  const theme = useTheme();
 
   const handleRouteSidebar = (item: any) => {
     router.push(item.route);
@@ -47,7 +49,12 @@ export default function BasicLayout({ children }: { children: ReactNode }) {
                 <ListItemIcon sx={{ minWidth: "24px !important", mr: 1.5 }}>
                   {item.icon}
                 </ListItemIcon>
-                <ListItemText primary={item.label} />
+                <ListItemText
+                  primary={item.label}
+                  sx={{
+                    "& .MuiTypography-root": { ...theme.typography["nm-bold"] },
+                  }}
+                />
               </ListItemButton>
             </ListItem>
           ))}

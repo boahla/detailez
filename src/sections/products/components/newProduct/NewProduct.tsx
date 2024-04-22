@@ -36,7 +36,7 @@ const NewProduct = () => {
           height="100%"
         >
           <AddCircleRounded />
-          <Typography>신규 QA 생성</Typography>
+          <Typography variant="nm-bold">신규 QA 생성</Typography>
         </Stack>
       </CustomCard1>
       <NewProductDialog
