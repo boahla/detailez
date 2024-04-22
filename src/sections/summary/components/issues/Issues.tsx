@@ -1,6 +1,7 @@
 import { useGetReportStatus } from "@/src/services/reports/useProducts";
 import {
   Box,
+  Skeleton,
   Stack,
   Table,
   TableBody,
@@ -24,7 +25,7 @@ const Issues = () => {
     pageNum: page,
     pageSize: 10,
   });
-  if (isLoading) return <>loading</>;
+  if (isLoading) return <Skeleton height={300} width="100%" />;
   if (!data) return <>데이터 없음</>;
 
   const tablecellItem = (

@@ -1,13 +1,14 @@
 import { Box, Grid } from "@mui/material";
 import { Product } from "./product";
 import { IProductReportItem } from "@/src/services/reports/types";
+import { ProductListSkeleton } from "@/src/components/skeletons";
 interface ProducListsProps {
   data: IProductReportItem[] | undefined;
   isLoading: boolean;
 }
 
 const ProductLists = ({ data, isLoading }: ProducListsProps) => {
-  if (isLoading) return <>loading</>;
+  if (isLoading) return <ProductListSkeleton />;
   return (
     <Box>
       <Grid container spacing={3}>

@@ -1,5 +1,6 @@
 import { reportStatus } from "@/src/datas/products";
 import reportService from "./reportService";
+import { keepPreviousData } from "@tanstack/react-query";
 
 const queryKeys = {
   all: ["report"] as const,
@@ -17,10 +18,12 @@ const queryOptions = {
   products: ({ status }: { status: reportStatus }) => ({
     queryKey: queryKeys.products(status),
     queryFn: () => reportService.getProductReports({ status }),
+    placeholderData: keepPreviousData,
   }),
   product: ({ productId }: { productId: number }) => ({
     queryKey: queryKeys.product(productId),
     queryFn: () => reportService.getProductReport({ productId }),
+    placeholderData: keepPreviousData,
   }),
   user: ({ productId }: { productId: number }) => ({
     queryKey: queryKeys.user(productId),

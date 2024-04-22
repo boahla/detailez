@@ -2,7 +2,14 @@ import { CustomCard1 } from "@/src/components/cards";
 import { useDialogs, useMobile } from "@/src/hooks";
 import { IProductItem } from "@/src/services/products/types";
 import { useEndProduct } from "@/src/services/products/useProducts";
-import { Button, Stack, Typography, useTheme } from "@mui/material";
+import {
+  Box,
+  Button,
+  Skeleton,
+  Stack,
+  Typography,
+  useTheme,
+} from "@mui/material";
 import { useParams, useRouter } from "next/navigation";
 import { ReactNode } from "react";
 import ProductEndDialog from "../dialogs/ProductEndDialog";
@@ -29,7 +36,12 @@ const Descriptions = ({
 
   const { mutate: handleEndProduct } = useEndProduct({});
 
-  if (isLoading) return <>loading</>;
+  if (isLoading)
+    return (
+      <Box>
+        <Skeleton height={150} />
+      </Box>
+    );
   if (!data) return <>데이터 없음</>;
 
   return (

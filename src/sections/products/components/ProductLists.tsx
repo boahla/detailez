@@ -3,6 +3,7 @@ import { Box, Grid } from "@mui/material";
 import { Product } from "./product";
 import { QueryObserverResult, RefetchOptions } from "@tanstack/react-query";
 import { NewProduct } from "./newProduct";
+import { ProductListSkeleton } from "@/src/components/skeletons";
 
 interface ProducListsProps {
   data: IProductItem[] | undefined;
@@ -13,7 +14,7 @@ interface ProducListsProps {
 }
 
 const ProductLists = ({ data, isLoading, load }: ProducListsProps) => {
-  if (isLoading) return <>loading</>;
+  if (isLoading) return <ProductListSkeleton />;
   return (
     <Box>
       <Grid container spacing={3}>

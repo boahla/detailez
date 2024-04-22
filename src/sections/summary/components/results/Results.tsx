@@ -1,6 +1,14 @@
 import { CustomCard1 } from "@/src/components/cards";
 import { IProductReport } from "@/src/services/reports/types";
-import { Box, Grid, Stack, SxProps, Typography, useTheme } from "@mui/material";
+import {
+  Box,
+  Grid,
+  Skeleton,
+  Stack,
+  SxProps,
+  Typography,
+  useTheme,
+} from "@mui/material";
 import ResultGraph from "./ResultGraph";
 import { ReactNode } from "react";
 import {
@@ -18,7 +26,7 @@ const Results = ({
   isLoading: boolean;
 }) => {
   const theme = useTheme();
-  if (isLoading) return <>loading</>;
+  if (isLoading) return <Skeleton height="200px" />;
   if (!data) return <>데이터 없음</>;
 
   const countRes = (val: number) => ((val / data.tc_count) * 100).toFixed(0);

@@ -1,6 +1,7 @@
 import { useGetReportUser } from "@/src/services/reports/useProducts";
 import {
   Box,
+  Skeleton,
   Stack,
   Table,
   TableBody,
@@ -23,7 +24,7 @@ const Testers = () => {
   const { data, isLoading } = useGetReportUser({
     productId: Number(productId),
   });
-  if (isLoading) return <>loading</>;
+  if (isLoading) return <Skeleton height={300} width="100%" />;
   if (!data || !data.length) return <>데이터 없음</>;
 
   const tablecellItem = (
