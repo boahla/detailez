@@ -1,7 +1,7 @@
-import React from 'react';
+import React from "react";
 
-import { Header } from './Header';
-import './page.css';
+import { Header } from "./Header";
+import "./page.css";
 
 type User = {
   name: string;
@@ -14,13 +14,13 @@ export const Page: React.FC = () => {
     <article>
       <Header
         user={user}
-        onLogin={() => setUser({ name: 'Jane Doe' })}
+        onLogin={() => setUser({ name: "Jane Doe" })}
         onLogout={() => setUser(undefined)}
-        onCreateAccount={() => setUser({ name: 'Jane Doe' })}
+        onCreateAccount={() => setUser({ name: "Jane Doe" })}
       />
 
       <section className="storybook-page">
-        <h2>Pages in Storybook</h2>
+        {/* <h2>Pages in Storybook</h2>
         <p>
           We recommend building UIs with a{' '}
           <a href="https://componentdriven.org" target="_blank" rel="noopener noreferrer">
@@ -66,7 +66,7 @@ export const Page: React.FC = () => {
             </g>
           </svg>
           Viewports addon in the toolbar
-        </div>
+        </div> */}
       </section>
     </article>
   );
