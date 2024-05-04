@@ -1,5 +1,5 @@
 "use client";
-import { Button, TextField, Typography } from "@mui/material";
+import { Button, Stack, TextField, Typography } from "@mui/material";
 import { signIn } from "next-auth/react";
 import { useRouter } from "next/navigation";
 import { SubmitHandler, useForm } from "react-hook-form";
@@ -41,23 +41,30 @@ export default function Page() {
         onSubmit={handleSubmit(onSubmit)}
         className="flex flex-col"
       >
-        <Typography>로그인해 주세요.</Typography>
-        <TextField
-          {...register("email", {
-            required: "이메일을 입력해 주세요.",
-          })}
-        />
-        <TextField
-          type="password"
-          {...register("password", {
-            required: "비밀번호 입력 해 주세요",
-          })}
-        />
-        <Typography>비밀번호 찾기</Typography>
-        <Button type="submit" variant="contained">
-          로그인
-        </Button>
-        <Typography>회원가입</Typography>
+        <Stack direction="column">
+          <Typography variant="nm-regular" sx={{ color: "dePurple.1" }}>
+            로그인해 주세요.
+          </Typography>
+          <TextField
+            placeholder="Email"
+            {...register("email", {
+              required: "이메일을 입력해 주세요.",
+            })}
+          />
+          <TextField
+            placeholder="비밀번호"
+            type="password"
+            {...register("password", {
+              required: "비밀번호 입력 해 주세요",
+            })}
+          />
+          <Typography>비밀번호 찾기</Typography>
+          <Button type="submit" variant="contained">
+            로그인
+          </Button>
+          <Typography>회원가입</Typography>
+        </Stack>
+
         {/* <p>{errorMsg}</p> */}
       </form>
     </div>
