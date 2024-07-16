@@ -86,7 +86,13 @@ const ProductTCImageLists = ({
   };
 
   return (
-    <Stack direction="column" spacing={1} pl={2}>
+    <Stack
+      direction="column"
+      spacing={1}
+      pl={2}
+      pr={2}
+      {...(isEdit && { mb: 12 })}
+    >
       {lists?.map((item: any, idx: any) => (
         <Stack
           onClick={() => onClickItem(idx)}
@@ -133,13 +139,14 @@ const ProductTCImageLists = ({
       {isEdit && (
         <Stack
           sx={{
-            position: "absolute",
+            position: "fixed",
             bottom: 0,
             left: 0,
             right: 0,
             bgcolor: "white",
-            pl: 2,
+            px: 2,
             py: 2,
+            width: 260,
           }}
         >
           <Button onClick={() => handleOpenDialog("upload")} fullWidth>

@@ -1,3 +1,3 @@
 import ProductStatusChip from "./ProductStatusChip";
-
-export { ProductStatusChip };
+import TCIssueChip from "./TCIssueChip";
+export { ProductStatusChip, TCIssueChip };

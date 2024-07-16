@@ -24,7 +24,7 @@ export default function BasicLayout({ children }: { children: ReactNode }) {
   return (
     <CommonLayout
       sidebar={
-        <List sx={{ pl: 2, pt: 4 }}>
+        <List sx={{ px: 2, pt: 4 }}>
           {LAYOUT_SIDEBAR_MENUS.map((item, idx) => (
             <ListItem
               key={idx}

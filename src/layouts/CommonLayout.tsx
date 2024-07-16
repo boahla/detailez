@@ -45,13 +45,13 @@ const Main = styled("main", { shouldForwardProp: (prop) => prop !== "open" })<{
   flexGrow: 1,
   backgroundColor: "white",
   minHeight: "100vh",
-  paddingLeft: theme.spacing(3),
+  // paddingLeft: theme.spacing(3),
   paddingRight: theme.spacing(3),
   transition: theme.transitions.create("margin", {
     easing: theme.transitions.easing.sharp,
     duration: theme.transitions.duration.leavingScreen,
   }),
-  marginLeft: `-${LAYOUTS_NUMBERS.drawerWidth}px`,
+  marginLeft: `-${LAYOUTS_NUMBERS.drawerWidth - 24}px`,
   ...(open && {
     transition: theme.transitions.create("margin", {
       easing: theme.transitions.easing.easeOut,

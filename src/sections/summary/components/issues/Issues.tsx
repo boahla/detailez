@@ -1,6 +1,7 @@
 import { useGetReportStatus } from "@/src/services/reports/useProducts";
 import {
   Box,
+  Chip,
   Skeleton,
   Stack,
   Table,
@@ -16,6 +17,8 @@ import { useState } from "react";
 import { IssueColumns } from "../../datas/tables";
 import { IReportStatusItem } from "@/src/services/reports/types";
 import { CustomCard1 } from "@/src/components/cards";
+import { TCIssueChip } from "@/src/components/chips";
+import { tcIssueStatus } from "@/src/datas/products";
 
 const Issues = () => {
   const { productId } = useParams();
@@ -33,15 +36,33 @@ const Issues = () => {
     item: IReportStatusItem
   ) => {
     const { id } = column;
-    if (id === "name") return <>{item[id]}</>;
+    if (id === "name")
+      return <Typography variant="nm-regular">{item[id]}</Typography>;
+
     if (id === "page")
       return (
-        <>
-          page{item["page_order"]} {item["tc_order"]}
-        </>
+        <Stack direction="row" spacing={0.5}>
+          <Typography variant="nm-regular">page{item["page_order"]}</Typography>
+          <Box
+            sx={{
+              backgroundColor: "deGreen.1",
+              width: 24,
+              height: 24,
+              borderRadius: 100,
+              display: "flex",
+              justifyContent: "center",
+            }}
+          >
+            <Typography variant="nm-regular" color="white">
+              {item["tc_order"]}
+            </Typography>
+          </Box>
+        </Stack>
       );
-    if (id === "contents") return <>{item["contents"]}</>;
-    if (id === "status") return <>{item["status"]}</>;
+
+    if (id === "status")
+      return <TCIssueChip value={item["status"] as tcIssueStatus} />;
+
     return <></>;
   };
   return (
@@ -57,28 +78,29 @@ const Issues = () => {
             <TableHead>
               <TableRow>
                 {IssueColumns.map((column) => (
-                  <TableCell
-                    key={column.id}
-                    // align={column.align}
-                    // style={{ minWidth: column.minWidth }}
-                  >
-                    {column.label}
-                  </TableCell>
+                  <TableCell key={column.id}>{column.label}</TableCell>
                 ))}
               </TableRow>
             </TableHead>
-            <TableBody>
-              {data.map((item, idx) => (
-                <TableRow key={idx}>
-                  {IssueColumns.map((column) => (
-                    <TableCell key={column.id}>
-                      {tablecellItem(column, item)}
-                    </TableCell>
-                  ))}
-                </TableRow>
-              ))}
-            </TableBody>
+            {!!data && !!data.length && (
+              <TableBody>
+                {data.map((item, idx) => (
+                  <TableRow key={idx}>
+                    {IssueColumns.map((column) => (
+                      <TableCell key={column.id}>
+                        {tablecellItem(column, item)}
+                      </TableCell>
+                    ))}
+                  </TableRow>
+                ))}
+              </TableBody>
+            )}
           </Table>
+          {(!data || !data.length) && (
+            <Stack width="100%" alignItems="center" py={5}>
+              이슈 리스트가 없습니다.
+            </Stack>
+          )}
         </TableContainer>
       </Stack>
     </CustomCard1>

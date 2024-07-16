@@ -20,16 +20,37 @@ const Header = ({ name }: IHeader) => {
         <Typography color="deGray.1">{name}</Typography>
       </Stack>
       <Stack direction="row" justifyContent="end" spacing={1.5}>
-        <Button size="small" onClick={() => router.push(`/products`)}>
-          임시저장
+        <Button
+          size="small"
+          onClick={() => router.push(`/products`)}
+          sx={{
+            bgcolor: "white",
+            border: "solid 1px",
+            borderColor: "dePurple.1",
+            px: "30px",
+            "&:hover": {
+              backgroundColor: "white",
+            },
+          }}
+        >
+          <Typography variant="nm-bold" color="dePurple.1">
+            임시저장
+          </Typography>
+        </Button>
+        <Button
+          size="small"
+          onClick={() => router.push(`/products`)}
+          sx={{
+            bgcolor: "deGreen.1",
+            px: "30px",
+          }}
+        >
+          <Typography variant="nm-bold" color="white">
+            QA 테스트 완료
+          </Typography>
         </Button>
       </Stack>
     </Stack>
-
-    // <Stack direction="row" justifyContent="space-between">
-    //   <Stack>{name}</Stack>
-    //   <Button onClick={() => router.push(`/products`)}>임시저장</Button>
-    // </Stack>
   );
 };
 export default Header;

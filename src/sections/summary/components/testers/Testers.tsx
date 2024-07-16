@@ -32,12 +32,13 @@ const Testers = () => {
     item: IReportUserItem
   ) => {
     const { id } = column;
-    if (id === "name") return <>{item[id]}</>;
+    if (id === "name")
+      return <Typography variant="nm-regular">{item[id]}</Typography>;
     if (id === "progress")
       return (
-        <>
+        <Typography variant="nm-regular">
           {item.tc_count - item.before_count}개 /{item.tc_count}개
-        </>
+        </Typography>
       );
     if (
       id === "pass_count" ||
@@ -45,7 +46,7 @@ const Testers = () => {
       id === "hold_count" ||
       id === "cancel_count"
     )
-      return <>{item[id]}</>;
+      return <Typography variant="nm-regular">{item[id]}</Typography>;
 
     return <></>;
   };
@@ -72,18 +73,25 @@ const Testers = () => {
                 ))}
               </TableRow>
             </TableHead>
-            <TableBody>
-              {data.map((item, idx) => (
-                <TableRow key={idx}>
-                  {TesterColumns.map((column) => (
-                    <TableCell key={column.id}>
-                      {tablecellItem(column, item)}
-                    </TableCell>
-                  ))}
-                </TableRow>
-              ))}
-            </TableBody>
+            {!!data && !!data.length && (
+              <TableBody>
+                {data.map((item, idx) => (
+                  <TableRow key={idx}>
+                    {TesterColumns.map((column) => (
+                      <TableCell key={column.id}>
+                        {tablecellItem(column, item)}
+                      </TableCell>
+                    ))}
+                  </TableRow>
+                ))}
+              </TableBody>
+            )}
           </Table>
+          {(!data || !data.length) && (
+            <Stack width="100%" alignItems="center" py={5}>
+              참여한 테스터가 없습니다.
+            </Stack>
+          )}
         </TableContainer>
       </Stack>
     </CustomCard1>

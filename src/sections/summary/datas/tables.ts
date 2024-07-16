@@ -7,10 +7,10 @@ export const IssueColumns = [
     id: "page",
     label: "TC 위치",
   },
-  {
-    id: "contents",
-    label: "내용",
-  },
+  // {
+  //   id: "contents",
+  //   label: "내용",
+  // },
   {
     id: "status",
     label: "상태",
