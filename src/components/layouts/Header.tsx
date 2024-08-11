@@ -39,7 +39,7 @@ const Header = ({ open, onClick }: HeaderProps) => {
           alignItems="center"
           justifyContent="space-between"
           sx={{
-            width: LAYOUTS_NUMBERS.drawerWidth,
+            width: LAYOUTS_NUMBERS.drawerWidth + 15,
           }}
         >
           <Image

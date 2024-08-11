@@ -14,6 +14,7 @@ const ImageUploadDialog = ({
   const fileInput = useRef(null);
   const handleImage = async (e: any) => {
     const file = e.target.files;
+    console.log({ file });
     if (!file) return;
 
     setImage((prev: any) => [...prev, ...file]);

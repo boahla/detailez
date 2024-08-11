@@ -65,7 +65,15 @@ const Descriptions = ({
           {data.status === "start" && isOwn && (
             <Button
               variant="contained"
-              sx={{ color: "deGreen.1", height: theme.typography.pxToRem(44) }}
+              sx={{
+                bgcolor: "white",
+                border: "solid 1px",
+                borderColor: "dePurple.1",
+                height: theme.typography.pxToRem(44),
+                "&:hover": {
+                  backgroundColor: "white",
+                },
+              }}
               onClick={() => handleOpenDialog("invite")}
             >
               초대하기
@@ -74,10 +82,16 @@ const Descriptions = ({
           {data.status === "start" && (
             <Button
               variant="contained"
-              sx={{ color: "deGreen.1", height: theme.typography.pxToRem(44) }}
+              sx={{
+                backgroundColor: "deGreen.1",
+                height: theme.typography.pxToRem(44),
+                px: "30px",
+              }}
               onClick={() => router.push(`/testcase/${productId}`)}
             >
-              테스트 시작
+              <Typography variant="nm-bold" color="white">
+                테스트 시작
+              </Typography>
             </Button>
           )}
           {data.status === "end" && (
@@ -85,23 +99,33 @@ const Descriptions = ({
               variant="contained"
               sx={{
                 bgcolor: "dePurple.1",
-                color: "white",
                 height: theme.typography.pxToRem(44),
+                "&:hover": {
+                  bgcolor: "dePurple.1",
+                },
               }}
               onClick={() => router.push(`/complete/${productId}`)}
             >
-              qa 결과 상세보기
+              <Typography variant="nm-bold" color="white">
+                qa 결과 상세보기
+              </Typography>
             </Button>
           )}
           {data.status === "start" && isOwn && (
             <Button
               variant="contained"
-              sx={{ color: "green", height: theme.typography.pxToRem(44) }}
+              sx={{
+                backgroundColor: "deGreen.1",
+                height: theme.typography.pxToRem(44),
+                px: "30px",
+              }}
               onClick={() => {
                 handleOpenDialog("end");
               }}
             >
-              프로젝트 qa 종료
+              <Typography variant="nm-bold" color="white">
+                프로젝트 qa 종료
+              </Typography>
             </Button>
           )}
         </Stack>

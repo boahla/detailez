@@ -71,6 +71,7 @@ const CustomToggleButton1 = ({
           aria-label={item.value}
           disableRipple={!onChange}
           sx={{
+            minWidth: 52,
             ...(item.value === alignment && {
               border: `solid 1px ${
                 item.value === "pass"
@@ -105,6 +106,7 @@ const CustomToggleButton1 = ({
                   ? theme.palette.deError.bg
                   : "black"
               } !important`,
+              "& p": { fontWeight: 700 },
             }),
           }}
         >

@@ -13,14 +13,19 @@ const StyledToggleButtonGroup = styled(ToggleButtonGroup)(({ theme }) => ({
   [`& .${toggleButtonGroupClasses.grouped}`]: {
     marginRight: theme.spacing(1.5),
     border: 0,
-    borderRadius: theme.shape.borderRadius,
+    borderRadius: "8px",
     backgroundColor: "white",
     color: theme.palette.dePurple[1],
     padding: "12px 20px",
+    ...theme.typography["nm-regular"],
     "&.Mui-selected": {
       backgroundColor: theme.palette.dePurple[1],
       color: "white",
       borderRadius: "40px",
+      ...theme.typography["nm-bold"],
+      "&:hover": {
+        backgroundColor: theme.palette.dePurple[1],
+      },
     },
   },
   [`& .${toggleButtonGroupClasses.middleButton},& .${toggleButtonGroupClasses.lastButton}`]:

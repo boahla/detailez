@@ -19,13 +19,16 @@ const components = {
     ],
     styleOverrides: {
       root: {
-        paddingLeft: "18px",
-        paddingRight: "18px",
         display: "inline-flex",
         textTransform: "none",
         whiteSpace: "nowrap",
         boxShadow: "none",
         borderRadius: "10px",
+        paddingLeft: "30px",
+        paddingRight: "30px",
+        fontWeight: "bold",
+        fontSize: 16,
+        lineHeight: "24px",
         "&:active": {
           boxShadow: "none",
         },

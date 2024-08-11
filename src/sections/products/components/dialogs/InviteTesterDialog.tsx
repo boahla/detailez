@@ -38,7 +38,15 @@ const InviteTesterDialog = ({
   };
 
   return (
-    <Dialog open={open} onClose={onCancel} maxWidth="sm" fullWidth>
+    <Dialog
+      open={open}
+      onClose={() => {
+        onCancel();
+        setEmails([]);
+      }}
+      maxWidth="sm"
+      fullWidth
+    >
       <DialogTitle sx={{ px: 4, pt: 4 }}>
         <Stack
           direction="row"
@@ -59,7 +67,12 @@ const InviteTesterDialog = ({
               테스트에 참여할 멤버를 초대하세요.
             </Typography>
           </Stack>
-          <IconButton onClick={onCancel}>
+          <IconButton
+            onClick={() => {
+              onCancel();
+              setEmails([]);
+            }}
+          >
             <Close />
           </IconButton>
         </Stack>

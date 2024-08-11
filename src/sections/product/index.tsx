@@ -12,7 +12,6 @@ import Header from "./components/Header";
 import { useCallback, useEffect, useState } from "react";
 import Contents from "./components/Contents";
 import { Formik, FormikHelpers, FormikValues } from "formik";
-import Footer from "./components/Footer";
 import CommonLayout from "@/src/layouts/CommonLayout";
 import { ProductTCImageLists } from "@/src/components/product";
 
@@ -95,7 +94,6 @@ const Product = ({}) => {
             </Stack>
           </Formik>
         )}
-        {/* <Footer /> */}
       </Card>
     </CommonLayout>
   );
